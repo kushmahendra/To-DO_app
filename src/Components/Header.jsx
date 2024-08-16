@@ -7,22 +7,20 @@ const Header = () => {
     { title: "I have to do some task!", priority: "Medium", dateTime: "2024-08-15T12:00" }
   ]);
   const [showTaskDetail, setShowTaskDetail] = useState(false);
-  const [currentTask, setCurrentTask] = useState(null); // To hold the task being edited
+  const [currentTask, setCurrentTask] = useState(null);
 
   const handleAddTodo = (newTask) => {
     if (currentTask !== null) {
-      // Editing an existing task
       setTodolist((prev) => 
         prev.map((item, index) => 
           index === currentTask.index ? { ...item, ...newTask } : item
         )
       );
     } else {
-      // Adding a new task
       setTodolist((prev) => [...prev, newTask]);
     }
     setShowTaskDetail(false);
-    setCurrentTask(null); // Reset current task after adding/editing
+    setCurrentTask(null);
   };
 
   const deleteTodo = (index) => {
@@ -36,39 +34,38 @@ const Header = () => {
   };
 
   return (
-    <div className="bg-gradient-to-r  from-purple-300 to-blue-300 min-h-screen p-8 items-center flex justify-center">
-      <div className="p-6 bg-yellow-100 shadow-lg border border-yellow-600 rounded-xl max-w-xl w-[50%] h-3/4">
-        <div className="text-3xl font-bold text-center text-white bg-green-800 border border-green-500 py-4 rounded-lg mb-6">
+    <div className="bg-gradient-to-r from-purple-300 to-blue-300 min-h-screen p-4 sm:p-6 md:p-8 flex justify-center items-center">
+      <div className="bg-yellow-100 shadow-lg border border-yellow-600 rounded-xl w-full sm:w-[90%] md:w-[75%] lg:w-[50%] h-auto p-4 sm:p-6 md:p-8">
+        <div className="text-2xl sm:text-3xl font-bold text-center text-white bg-green-800 border border-green-500 py-3 sm:py-4 rounded-lg mb-4 sm:mb-6">
           To Do App
         </div>
-        <div className="flex flex-col gap-4">
-          <div className="flex items-center gap-4">
-            <h1 className="text-start text-2xl font-semibold">Tasks</h1>
+        <div className="flex flex-col gap-3 sm:gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
+            <h1 className="text-lg sm:text-xl md:text-2xl font-semibold">Tasks</h1>
             <div className="flex-1"></div>
             <button
               onClick={() => setShowTaskDetail(true)}
-              className="bg-green-600 text-white py-2 px-4 rounded-lg shadow-md hover:bg-green-900 transition-colors duration-300"
+              className="bg-green-600 text-white py-2 px-3 sm:px-4 rounded-lg shadow-md hover:bg-green-900 transition-colors duration-300"
             >
               Add Task
             </button>
           </div>
         </div>
 
-        {/* TaskDetail Modal */}
         {showTaskDetail && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-            <div className="bg-white w-[45%] self-center item-center justify-center flex-col p-6 rounded-lg shadow-lg">
+            <div className="bg-white w-full sm:w-[90%] md:w-[75%] lg:w-[50%] p-4 sm:p-6 rounded-lg shadow-lg">
               <TaskDetail 
                 onClose={() => setShowTaskDetail(false)} 
                 onAdd={handleAddTodo}
-                task={currentTask} // Pass the current task being edited
+                task={currentTask} 
               />
             </div>
           </div>
         )}
 
-        <div className="border-t border-gray-400 mt-4"></div>
-        <div className="mt-4 space-y-4">
+        <div className="border-t border-gray-400 mt-3 sm:mt-4"></div>
+        <div className="mt-3 sm:mt-4 space-y-3 sm:space-y-4">
           {todolist.map((item, index) => (
             <Items
               key={index}
