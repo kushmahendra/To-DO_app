@@ -1,53 +1,89 @@
 import React, { useState } from 'react';
 import Items from './Items';
+import TaskDetail from './Taskdetail';
 
 const Header = () => {
-  const [todo, setTodo] = useState("");
-  const [todolist, setTodolist] = useState(["I have to do some task !"]);
+  const [todolist, setTodolist] = useState([
+    { title: "I have to do some task!", priority: "Medium", dateTime: "2024-08-15T12:00" }
+  ]);
+  const [showTaskDetail, setShowTaskDetail] = useState(false);
+  const [currentTask, setCurrentTask] = useState(null); // To hold the task being edited
 
-  const AddTodo = () => {
-    if (todo !== "") {
-      setTodolist((prev) => [...prev, todo]);
-      setTodo(""); // Clear the input after adding
+  const handleAddTodo = (newTask) => {
+    if (currentTask !== null) {
+      // Editing an existing task
+      setTodolist((prev) => 
+        prev.map((item, index) => 
+          index === currentTask.index ? { ...item, ...newTask } : item
+        )
+      );
+    } else {
+      // Adding a new task
+      setTodolist((prev) => [...prev, newTask]);
     }
+    setShowTaskDetail(false);
+    setCurrentTask(null); // Reset current task after adding/editing
   };
 
   const deleteTodo = (index) => {
     setTodolist((prev) => prev.filter((_, i) => i !== index));
   };
 
+  const editTodo = (index) => {
+    const taskToEdit = todolist[index];
+    setCurrentTask({ ...taskToEdit, index });
+    setShowTaskDetail(true);
+  };
+
   return (
-    <>
-    <div className=" bg-purple-200 ">
-      <div className="p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 bg-purple-200 border border-yellow-600 rounded-xl">
-        <div className="text-2xl font-semibold text-center mb-4">To Do App</div>
-        <div className="m-4 p-4 flex flex-col sm:flex-row border border-gray-300 rounded-2xl justify-between items-center bg-blue-400 gap-2">
-          <h1 className="text-lg mb-2 sm:mb-0">Make lists .....</h1>
-          <input
-            type="text"
-            placeholder="Add list"
-            value={todo}
-            onChange={(e) => setTodo(e.target.value)}
-            className="border border-gray-400 rounded-lg p-2 flex-grow mb-2 sm:mb-0"
-          />
-          <i
-            onClick={() => AddTodo()}
-            className="fa-solid fa-plus cursor-pointer border bg-green-500 text-white py-2 px-4 rounded-lg"
-          ></i>
+    <div className="bg-gradient-to-r  from-purple-300 to-blue-300 min-h-screen p-8 items-center flex justify-center">
+      <div className="p-6 bg-yellow-100 shadow-lg border border-yellow-600 rounded-xl max-w-xl w-[50%] h-3/4">
+        <div className="text-3xl font-bold text-center text-white bg-green-800 border border-green-500 py-4 rounded-lg mb-6">
+          To Do App
         </div>
+        <div className="flex flex-col gap-4">
+          <div className="flex items-center gap-4">
+            <h1 className="text-start text-2xl font-semibold">Tasks</h1>
+            <div className="flex-1"></div>
+            <button
+              onClick={() => setShowTaskDetail(true)}
+              className="bg-green-600 text-white py-2 px-4 rounded-lg shadow-md hover:bg-green-900 transition-colors duration-300"
+            >
+              Add Task
+            </button>
+          </div>
+        </div>
+
+        {/* TaskDetail Modal */}
+        {showTaskDetail && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+            <div className="bg-white w-[45%] self-center item-center justify-center flex-col p-6 rounded-lg shadow-lg">
+              <TaskDetail 
+                onClose={() => setShowTaskDetail(false)} 
+                onAdd={handleAddTodo}
+                task={currentTask} // Pass the current task being edited
+              />
+            </div>
+          </div>
+        )}
+
         <div className="border-t border-gray-400 mt-4"></div>
-        <div className="mt-4">
+        <div className="mt-4 space-y-4">
           {todolist.map((item, index) => (
-            <Items key={index} title={item} deleteTodo={deleteTodo} // Pass the deleteTodo function
-            index={index} // Pass the index of the item
+            <Items
+              key={index}
+              title={item.title}
+              priority={item.priority}
+              dateTime={item.dateTime}
+              deleteTodo={deleteTodo}
+              editTodo={editTodo}
+              index={index}
             />
           ))}
         </div>
       </div>
-      </div>
-    </>
+    </div>
   );
 };
 
 export default Header;
-
