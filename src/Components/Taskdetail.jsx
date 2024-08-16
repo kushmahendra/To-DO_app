@@ -20,7 +20,8 @@ const TaskDetail = ({ onClose, onAdd, task }) => {
   };
 
   return (
-    <div className='border border-gray-300  shadow-lg rounded-lg p-6 bg-gradient-to-r from-blue-50 via-green-50 to-yellow-50 max-w-lg mx-auto mt-10'>
+    <div className='border border-yellow-600  shadow-lg rounded-lg p-6 bg-gradient-to-r from-blue-50 via-green-50
+     to-yellow-50 max-w-lg mx-auto my-10'>
       <h1 className='text-center font-bold text-4xl text-blue-900 mb-6'>Task Details</h1>
 
       <div className='mb-6'>

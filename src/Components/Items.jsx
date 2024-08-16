@@ -12,7 +12,7 @@ const Items = ({ title, priority, dateTime, deleteTodo, editTodo, index }) => {
   return (
     <div className='border border-green-500 rounded-lg p-4'>
       <h1 className='p-1 text-start font-semibold'>Priority: <span className='text-red-500'>{priority}</span></h1>
-      <h1 className='p-1 text-start  font-semibold'>Date-Time: <span className='text-purple-500'>{dateTime}</span></h1>
+      <h1 className='p-1 text-start  font-semibold'>Deadline: <span className='text-purple-500'>{dateTime}</span></h1>
       
       <div className='flex gap-4 mt-2 border border-gray-400 rounded-lg items-center bg-gradient-to-r from-gray-200 to-gray-300 py-2 px-4 shadow-lg'>
         <input
