@@ -3,13 +3,13 @@ A simple and user-friendly To-Do App built with React.js ⚛️ and Tailwind CSS
 
 # 🚀 Tech Stack
 
-React.js: Provides a reactive and component-based UI for managing state and rendering tasks dynamically.
+**React.js:** Provides a reactive and component-based UI for managing state and rendering tasks dynamically.
 
-Tailwind CSS: Enables quick styling with utility-first classes for a clean and modern design.
+**Tailwind CSS:** Enables quick styling with utility-first classes for a clean and modern design.
 
-Vite: Utilized as the build tool for faster development and optimized performance.
+**Vite:** Utilized as the build tool for faster development and optimized performance.
 
-Local Storage: Used to persist tasks between sessions, ensuring data is not lost on page refresh.
+**Local Storage:** Used to persist tasks between sessions, ensuring data is not lost on page refresh.
 
 # ✨ Features
 
@@ -50,7 +50,7 @@ Install dependencies:
 Start the development server:
 
 
-npm run dev
+**npm run dev**
 
 Open your browser and visit: http://localhost:3000
 
@@ -62,11 +62,11 @@ This project can be easily deployed on platforms like Netlify, Vercel, or GitHub
 
 Use the following commands for development:
 
-npm run dev: Start the development server.
+**npm run dev:** Start the development server.
 
-npm run build: Build the project for production.
+**npm run build:** Build the project for production.
 
-npm run serve: Serve the production build locally.
+**npm run serve:** Serve the production build locally.
 
 # 📧 Contact
 
@@ -74,7 +74,7 @@ If you have any questions or suggestions, feel free to reach out:
 
 **Email:** kushwahamahendra691@gmail.com
 
-**LinkedIn:**
+**LinkedIn:** www.linkedin.com/in/mahendra-kushwaha-333569259
 
 # 🙌 Acknowledgments
 
